@@ -17,6 +17,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ![Randomized Pairings](/public/images/randomized-pairings.png)
 
 ## To Do List
+- [x] Add logic to separate the input based on commas or new lines
+- [x] Add truly random shuffle of input
+- [x] Add copy to clipboard functionality
 - [ ] Add authentication
 - [ ] Connect to mongodb
 - [ ] Add ability for users to save past results
