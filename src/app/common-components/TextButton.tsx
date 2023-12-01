@@ -3,12 +3,12 @@ import { Button } from '@mui/material'
 type Props = {
     disabledState: boolean,
     label: string,
-    handleSubmit: () => void,
+    handleClick: () => void,
 }
 
-export default function TextButton({ disabledState, label, handleSubmit }: Props) {
+export default function TextButton({ disabledState, label, handleClick }: Props) {
     return (
-        <Button className='font-mono' variant="text" color="primary" disabled={disabledState} onClick={handleSubmit}>
+        <Button className='font-mono' variant="text" color="primary" disabled={disabledState} onClick={handleClick}>
             {label}
         </Button>
     )

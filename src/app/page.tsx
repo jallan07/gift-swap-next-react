@@ -4,17 +4,23 @@ import { useEffect, useState } from 'react'
 import { Box, Divider, TextField } from '@mui/material'
 import TextButton from './common-components/TextButton'
 import Pairings from './common-components/Pairings'
+import { pairingsToString } from './helpers/pairingsToString'
 
 export default function Home() {
-
   const [inputState, setInputState] = useState<string>('')
   const [giftSwapState, setGiftSwapState] = useState<{ sender: string; receiver: string; }[] | []>([])
 
   const handleSubmit = async () => {
-    // split input into array using new lines or commas as delimiters
+    if (!inputState) return
     const inputArray = inputState.trim().split(/[\n,]+/);
     const giftSwapArr = await giftSwap(inputArray)
     setGiftSwapState(giftSwapArr)
+  }
+
+  const handleCopyToClipboard = async () => {
+    if (!inputState) return
+    const copyText = await pairingsToString(giftSwapState)
+    navigator.clipboard.writeText(copyText)
   }
 
   return (
@@ -28,7 +34,9 @@ export default function Home() {
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
           >
             by{' '}
-            <span className="font-mono justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">josh<code className="font-mono font-bold"> allan</code></span>
+            <a href='https://github.com/jallan07' rel='noreferrer' target='_blank'>
+              <span className="font-mono justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">josh<code className="font-mono font-bold"> allan</code></span>
+            </a>
           </div>
         </div>
       </div>
@@ -51,13 +59,14 @@ export default function Home() {
             onBlur={(e) => setInputState(e.target.value)}
           />
         </Box>
-        <TextButton disabledState={!inputState} handleSubmit={() => handleSubmit()} label="Submit" />
+        <TextButton disabledState={false} handleClick={() => handleSubmit()} label="Submit" />
       </div>
 
       {giftSwapState && giftSwapState.length > 0 && (
         <>
           <Divider className="my-5" variant="fullWidth" />
           <Pairings giftSwapState={giftSwapState} />
+          <TextButton disabledState={false} label={'copy to clipboard'} handleClick={() => handleCopyToClipboard()} />
         </>
       )}
 
