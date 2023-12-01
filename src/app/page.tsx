@@ -10,33 +10,9 @@ export default function Home() {
   const [inputState, setInputState] = useState<string>('')
   const [giftSwapState, setGiftSwapState] = useState<{ sender: string; receiver: string; }[] | []>([])
 
-  useEffect(() => {
-    const arr = [
-      "Sis. Allan",
-      "Sis. Snider",
-      "Sis. Dickerson",
-      "Ashlyn",
-      "Madi",
-      "Ellerie",
-      "Mason",
-      "Julia",
-      "Lucy",
-      "Charly",
-      "Kylee (Mason's cousin)",
-      "Emmy (Madi's friend)",
-      "Kylie (Ellerie's friend)",
-      "Liv (Madi's friend)",
-    ];
-
-    const giftSwapArr = giftSwap(arr)
-    console.log(giftSwapArr)
-  }, [])
-
-
   const handleSubmit = async () => {
     // split input into array using new lines or commas as delimiters
-    const inputArray = inputState.split(/[\n,]+/);
-
+    const inputArray = inputState.trim().split(/[\n,]+/);
     const giftSwapArr = await giftSwap(inputArray)
     setGiftSwapState(giftSwapArr)
   }
