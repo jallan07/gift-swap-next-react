@@ -17,6 +17,6 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ![Randomized Pairings](/public/images/randomized-pairings.png)
 
 ## To Do List
-- [] Add authentication
-- [] Connect to mongodb
-- [] Add ability for users to save past results
+- [ ] Add authentication
+- [ ] Connect to mongodb
+- [ ] Add ability for users to save past results
